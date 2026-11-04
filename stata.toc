@@ -1,0 +1,4 @@
+v 3
+d XTXAI: Explainable Econometrics and Machine Learning for Stata
+d Development distribution; not an SSC-approved package.
+p xtxai Panel-reference explanations and guarded econometric model diagnostics

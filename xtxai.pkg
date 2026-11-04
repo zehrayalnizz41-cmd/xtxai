@@ -1,0 +1,12 @@
+v 3
+d XTXAI: Explainable Econometrics and Machine Learning for Stata
+d Author: Zehra Yalniz
+d Version: 0.44.1 release candidate (not SSC-approved)
+d Distribution-Date: 20261104
+d Includes panel-reference interventional Shapley and guarded econometric diagnostic adapters.
+d Some model routes are partial or experimental; see help xtxai.
+f xtxai.ado
+f xtxai.sthlp
+f xtxaiml_engine.py
+f xtxaiml_pssa_engine.py
+e
