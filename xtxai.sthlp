@@ -1,3 +1,4 @@
+
 Title
 
     xtxai -- Explainability tools for Stata estimation and machine-learning
@@ -5,34 +6,32 @@ Title
 
 Syntax
 
-    Linear PSSA after regress or xtreg, fe/re:
-        xtxai, model(pssa) explain(linear) vars(varlist) id(panelvar)
-            background(pooled|unit|factor) [factor(varname) prefix(name)
-            replace]
+    Linear PSSA after regress or xtreg, fe/re: xtxai, model(pssa)
+    explain(linear) vars(varlist) id(panelvar) background(pooled|unit|factor)
+    [factor(varname) prefix(name) replace]
 
-    Fitted ML model and reference-game Shapley:
-        xtxai depvar indepvars, model(xgboost|ebm) explain(pssa) holdout(time)
-            id(panelvar) background(pooled|unit) [prefix(name) replace]
+    Fitted ML model and reference-game Shapley: xtxai depvar indepvars,
+    model(xgboost|ebm) explain(pssa) holdout(time) id(panelvar)
+    background(pooled|unit) [prefix(name) replace]
 
-    Plain ML:
-        xtxai depvar indepvars, model(xgboost|ebm|randomforest) holdout(time)
+    Plain ML: xtxai depvar indepvars, model(xgboost|ebm|randomforest)
+    holdout(time)
 
-    xtxai, model(fe|re) -- previously estimated FE/RE.
-    xtxai, model(xtscc) explain(within|linear) replace -- xtscc.
-    xtxai, model(mg) explain(full) replace -- xtmg MG.
-    xtxai, model(amg) explain(full) replace -- xtmg AMG; guarded
-        reconstruction and numerical-precision qualification.
-    xtxai, model(pmg) explain(dynamic) [prefix(name) replace] -- xtpmg PMG;
-        variable-length ECM terms and guarded LR/ECT contract.
-    xtxai, model(csardl) explain(partial) id(panelvar) [prefix(name) replace]
-        -- xtdcce2 CS-ARDL; five observed dynamic terms only; numerical panel
-        IDs 1..G.
+    xtxai, model(fe|re) -- previously estimated FE/RE. xtxai, model(xtscc)
+    explain(within|linear) replace -- xtscc. xtxai, model(mg) explain(full)
+    replace -- xtmg MG. xtxai, model(amg) explain(full) replace -- xtmg AMG;
+    guarded reconstruction and numerical-precision qualification. xtxai,
+    model(pmg) explain(dynamic) [prefix(name) replace] -- xtpmg PMG;
+    variable-length ECM terms and guarded LR/ECT contract. xtxai,
+    model(csardl) explain(partial) id(panelvar) [prefix(name) replace] --
+    xtdcce2 CS-ARDL; five observed dynamic terms only; numerical panel IDs
+    1..G.
 
 Description
 
     XTXAI combines several estimator-specific linear-index attribution tools
     with model-dependent ML explanations. All modes are observational and do
-    not establish causal effects. Model-specific capabilities differ. Some
+    not establish causal effects.  Model-specific capabilities differ. Some
     legacy adapters are prototypes, not supported final-release claims.
 
     The model(pssa) linear mode computes interventional Shapley attribution
@@ -58,22 +57,20 @@ Options
 
 Examples
 
-    . webuse grunfeld, clear
-    . xtset company year
-    . regress invest mvalue kstock
-    . xtxai, model(pssa) explain(linear) vars(mvalue kstock) id(company)
-        background(unit) prefix(pu) replace
-    . xtxai invest mvalue kstock, model(xgboost) explain(pssa) holdout(1950)
-        id(company) background(pooled) prefix(xp) replace
-    . xtxai invest mvalue kstock, model(ebm) explain(pssa) holdout(1950)
-        id(company) background(unit) prefix(xe) replace
+    . webuse grunfeld, clear . xtset company year . regress invest mvalue
+    kstock . xtxai, model(pssa) explain(linear) vars(mvalue kstock)
+    id(company) background(unit) prefix(pu) replace . xtxai invest mvalue
+    kstock, model(xgboost) explain(pssa) holdout(1950) id(company)
+    background(pooled) prefix(xp) replace . xtxai invest mvalue kstock,
+    model(ebm) explain(pssa) holdout(1950) id(company) background(unit)
+    prefix(xe) replace
 
 PMG dynamic decomposition: verified scope
 
     The model(pmg) explain(dynamic) adapter reads short-run terms from actual
     xtpmg stored coefficient names and matches panel IDs with stored per-unit
     coefficient rows. It reconstructs the estimator's ECT from named long-run
-    coefficients and tests agreement. Unsupported normalization or ambiguous
+    coefficients and tests agreement.  Unsupported normalization or ambiguous
     panel mapping is rejected rather than silently inferred.
 
     Reported StataNow 19 verification covers ARDL(1,1,1), ARDL(2,1,1),
@@ -112,3 +109,4 @@ Author
     Dr. Zehra Yalnız. XTXAI is listed on SSC. This help file documents a
     development candidate and is not proof that all listed features are
     included in the SSC-distributed ado.
+
